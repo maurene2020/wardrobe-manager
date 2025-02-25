@@ -1,4 +1,7 @@
 // Project Structure
+git add .
+git commit -m "Initial commit for Wardrobe Management System"
+git push origin main
 
 Wardrobe-Manager-Vue-Laravel/
 |-- backend/ (Laravel 11 API)
