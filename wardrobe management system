@@ -2,6 +2,8 @@
 git add .
 git commit -m "Initial commit for Wardrobe Management System"
 git push origin main
+cd backend
+composer install
 
 Wardrobe-Manager-Vue-Laravel/
 |-- backend/ (Laravel 11 API)
