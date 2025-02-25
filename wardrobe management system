@@ -1,0 +1,93 @@
+// Project Structure
+
+Wardrobe-Manager-Vue-Laravel/
+|-- backend/ (Laravel 11 API)
+|   |-- app/
+|   |-- database/
+|   |-- public/
+|   |-- routes/
+|   |-- storage/
+|   |-- .env
+|   |-- composer.json
+|
+|-- frontend/ (Vue 3 App)
+|   |-- src/
+|   |-- public/
+|   |-- package.json
+|   |-- vite.config.js
+|   |-- .env
+|
+|-- README.md
+
+// Backend: Laravel 11 API
+// Install Laravel
+composer create-project laravel/laravel backend
+
+// Configure Database in .env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=wardrobe_db
+DB_USERNAME=root
+DB_PASSWORD=
+
+// Run Migrations
+php artisan migrate
+
+// Create Models & Controllers
+php artisan make:model Clothing -m
+php artisan make:controller ClothingController --resource
+
+// Define Routes in routes/api.php
+Route::apiResource('clothing', ClothingController::class);
+
+// Handle Image Uploads
+php artisan storage:link
+
+// Frontend: Vue 3 Setup
+npm create vue@latest frontend
+
+// Install Axios & Vue Router
+cd frontend
+npm install axios vue-router
+
+// Define Routes in router/index.js
+import { createRouter, createWebHistory } from 'vue-router';
+import Home from '../views/Home.vue';
+import Clothing from '../views/Clothing.vue';
+
+const routes = [
+  { path: '/', component: Home },
+  { path: '/clothing', component: Clothing }
+];
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
+});
+
+export default router;
+
+// Create Components for Clothing Management
+// - ClothingList.vue
+// - ClothingForm.vue
+// - Authentication.vue
+
+// Connect API Calls with Axios
+import axios from 'axios';
+const API_URL = 'http://localhost:8000/api/clothing';
+
+const getClothingItems = async () => {
+  const response = await axios.get(API_URL);
+  return response.data;
+};
+
+export { getClothingItems };
+
+// Push to GitHub
+cd ../
+git init
+git remote add origin https://github.com/maurene2020/Wardrobe-Manager-Vue-Laravel.git
+git add .
+git commit -m "Initial commit"
+git push -u origin main
